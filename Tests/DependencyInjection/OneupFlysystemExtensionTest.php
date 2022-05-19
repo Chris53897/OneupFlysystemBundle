@@ -94,7 +94,7 @@ class OneupFlysystemExtensionTest extends ContainerAwareTestCase
     public function testAdapterAvailability()
     {
         /** @var \SimpleXMLElement $adapters */
-        $adapters = simplexml_load_file(__DIR__.'/../../Resources/config/adapters.xml');
+        $adapters = simplexml_load_string(file_get_contents(__DIR__ . '/../../Resources/config/adapters.xml'));
 
         foreach ($adapters->children()->children() as $service) {
             foreach ($service->attributes() as $key => $attribute) {

@@ -9,7 +9,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         $bundles = array(
             new FrameworkBundle(),
@@ -21,7 +21,7 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config/config.yml');
     }

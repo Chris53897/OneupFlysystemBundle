@@ -3,12 +3,13 @@
 namespace Oneup\FlysystemBundle\Tests\Model;
 
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ContainerAwareTestCase extends WebTestCase
 {
     /**
-     * @var Client
+     * @var KernelBrowser
      */
     protected $client;
     protected static $container;

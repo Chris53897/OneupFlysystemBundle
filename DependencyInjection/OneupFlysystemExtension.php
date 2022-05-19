@@ -16,7 +16,7 @@ class OneupFlysystemExtension extends Extension
     private $adapterFactories;
     private $cacheFactories;
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factories.xml');
@@ -50,7 +50,7 @@ class OneupFlysystemExtension extends Extension
         $this->loadStreamWrappers($config['filesystems'], $filesystems, $loader, $container);
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factories.xml');
