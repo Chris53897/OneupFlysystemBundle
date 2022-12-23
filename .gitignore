@@ -6,3 +6,4 @@ vendor
 tests/App/cache
 tests/App/logs
 tests/App/var
+var/cache/test
