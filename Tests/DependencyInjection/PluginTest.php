@@ -8,59 +8,56 @@ use Oneup\FlysystemBundle\Tests\Model\ContainerAwareTestCase;
 
 class PluginTest extends ContainerAwareTestCase
 {
-    public function testIfSinglePluginIsAttached()
+    public function testIfSinglePluginIsAttached(): void
     {
         /** @var FilesystemInterface $filesystem */
         $filesystem = self::$container->get('oneup_flysystem.myfilesystem_filesystem');
 
         $refl = new \ReflectionObject($filesystem);
         $property = $refl->getProperty('plugins');
-        $property->setAccessible(true);
 
         $plugins = $property->getValue($filesystem);
 
-        $this->assertTrue(is_array($plugins));
+        $this->assertIsArray($plugins);
 
         foreach ($plugins as $plugin) {
-            $this->assertTrue($plugin instanceof PluginInterface);
+            $this->assertInstanceOf(PluginInterface::class, $plugin);
         }
     }
 
-    public function testIfAllPluginsAreAttachedCorrectly()
+    public function testIfAllPluginsAreAttachedCorrectly(): void
     {
         /** @var FilesystemInterface $filesystem */
         $filesystem = self::$container->get('oneup_flysystem.myfilesystem2_filesystem');
 
         $refl = new \ReflectionObject($filesystem);
         $property = $refl->getProperty('plugins');
-        $property->setAccessible(true);
 
         $plugins = $property->getValue($filesystem);
 
-        $this->assertTrue(is_array($plugins));
+        $this->assertIsArray($plugins);
         $this->assertCount(2, $plugins);
 
         foreach ($plugins as $plugin) {
-            $this->assertTrue($plugin instanceof PluginInterface);
+            $this->assertInstanceOf(PluginInterface::class, $plugin);
         }
     }
 
-    public function testIfGlobalPluginIsAttached()
+    public function testIfGlobalPluginIsAttached(): void
     {
         /** @var FilesystemInterface $filesystem */
         $filesystem = self::$container->get('oneup_flysystem.myfilesystem3_filesystem');
 
         $refl = new \ReflectionObject($filesystem);
         $property = $refl->getProperty('plugins');
-        $property->setAccessible(true);
 
         $plugins = $property->getValue($filesystem);
 
-        $this->assertTrue(is_array($plugins));
+        $this->assertIsArray($plugins);
         $this->assertCount(1, $plugins);
 
         foreach ($plugins as $plugin) {
-            $this->assertTrue($plugin instanceof PluginInterface);
+            $this->assertInstanceOf(PluginInterface::class, $plugin);
         }
     }
 }

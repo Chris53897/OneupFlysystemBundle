@@ -9,25 +9,14 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    protected $adapterFactories;
-    protected $cacheFactories;
-
-    public function __construct(array $adapterFactories, array $cacheFactories)
+    public function __construct(protected array $adapterFactories, protected array $cacheFactories)
     {
-        $this->adapterFactories = $adapterFactories;
-        $this->cacheFactories = $cacheFactories;
     }
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('oneup_flysystem');
-
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('oneup_flysystem');
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $this->addCacheSection($rootNode);
         $this->addAdapterSection($rootNode);
@@ -41,7 +30,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addCacheSection(ArrayNodeDefinition $node)
+    private function addCacheSection(ArrayNodeDefinition $node): void
     {
         $cacheNodeBuilder = $node
             ->children()
@@ -59,7 +48,7 @@ class Configuration implements ConfigurationInterface
         }
     }
 
-    private function addAdapterSection(ArrayNodeDefinition $node)
+    private function addAdapterSection(ArrayNodeDefinition $node): void
     {
         $adapterNodeBuilder = $node
             ->fixXmlConfig('adapter')
@@ -78,7 +67,7 @@ class Configuration implements ConfigurationInterface
         }
     }
 
-    private function addFilesystemSection(ArrayNodeDefinition $node)
+    private function addFilesystemSection(ArrayNodeDefinition $node): void
     {
         $supportedVisibilities = array(
             AdapterInterface::VISIBILITY_PRIVATE,

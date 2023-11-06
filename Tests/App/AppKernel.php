@@ -11,12 +11,12 @@ class AppKernel extends Kernel
 {
     public function registerBundles(): iterable
     {
-        $bundles = array(
+        $bundles = [
             new FrameworkBundle(),
 
             // Test this Bundle
             new OneupFlysystemBundle(),
-        );
+        ];
 
         return $bundles;
     }

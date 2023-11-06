@@ -10,7 +10,7 @@ class StreamWrapperManager
     /**
      * @var Configuration[]
      */
-    private $configurations;
+    private array $configurations;
 
     /**
      * StreamWrapperManager constructor.
@@ -26,31 +26,17 @@ class StreamWrapperManager
         }
     }
 
-    /**
-     * @param string        $filesystemName
-     * @param Configuration $configuration
-     */
-    public function addConfiguration($filesystemName, Configuration $configuration)
+    public function addConfiguration(string $filesystemName, Configuration $configuration): void
     {
         $this->configurations[$filesystemName] = $configuration;
     }
 
-    /**
-     * @param string $filesystemName
-     *
-     * @return bool
-     */
-    public function hasConfiguration($filesystemName)
+    public function hasConfiguration(string $filesystemName): bool
     {
         return isset($this->configurations[$filesystemName]);
     }
 
-    /**
-     * @param string $filesystemName
-     *
-     * @return Configuration
-     */
-    public function getConfiguration($filesystemName)
+    public function getConfiguration(string $filesystemName): Configuration
     {
         if (!$this->hasConfiguration($filesystemName)) {
             throw new \InvalidArgumentException(sprintf('The filesystem "%s" has no stream wrapper configuration', $filesystemName));
@@ -62,7 +48,7 @@ class StreamWrapperManager
     /**
      * @throws \Exception
      */
-    public function register()
+    public function register(): void
     {
         foreach ($this->configurations as $configuration) {
             // Unregister stream wrapper first in case it was already registered.
@@ -77,7 +63,7 @@ class StreamWrapperManager
     /**
      * @throws \Exception
      */
-    public function unregister()
+    public function unregister(): void
     {
         foreach ($this->configurations as $configuration) {
             if (!FlysystemStreamWrapper::unregister($configuration->getProtocol())) {

@@ -31,9 +31,9 @@ class OneupFlysystemExtension extends Extension
         $loader->load('cache.xml');
         $loader->load('plugins.xml');
 
-        $adapters = array();
-        $filesystems = array();
-        $caches = array();
+        $adapters = [];
+        $filesystems = [];
+        $caches = [];
 
         foreach ($config['adapters'] as $name => $adapter) {
             $adapters[$name] = $this->createAdapter($name, $adapter, $container, $adapterFactories);
@@ -55,12 +55,12 @@ class OneupFlysystemExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('factories.xml');
 
-        list($adapterFactories, $cacheFactories) = $this->getFactories($container);
+        [$adapterFactories, $cacheFactories] = $this->getFactories($container);
 
         return new Configuration($adapterFactories, $cacheFactories);
     }
 
-    private function createCache($name, array $config, ContainerBuilder $container, array $factories)
+    private function createCache($name, array $config, ContainerBuilder $container, array $factories): string
     {
         foreach ($config as $key => $adapter) {
             if (array_key_exists($key, $factories)) {
@@ -74,7 +74,7 @@ class OneupFlysystemExtension extends Extension
         throw new \LogicException(sprintf('The cache \'%s\' is not configured.', $name));
     }
 
-    private function createAdapter($name, array $config, ContainerBuilder $container, array $factories)
+    private function createAdapter($name, array $config, ContainerBuilder $container, array $factories): string
     {
         foreach ($config as $key => $adapter) {
             if (array_key_exists($key, $factories)) {
@@ -88,7 +88,7 @@ class OneupFlysystemExtension extends Extension
         throw new \LogicException(sprintf('The adapter \'%s\' is not configured.', $name));
     }
 
-    private function createFilesystem($name, array $config, ContainerBuilder $container, array $adapters, array $caches)
+    private function createFilesystem($name, array $config, ContainerBuilder $container, array $adapters, array $caches): Reference
     {
         if (!array_key_exists($config['adapter'], $adapters)) {
             throw new \LogicException(sprintf('The adapter \'%s\' is not defined.', $config['adapter']));
@@ -163,7 +163,7 @@ class OneupFlysystemExtension extends Extension
         return new Reference($id);
     }
 
-    private function getFactories(ContainerBuilder $container)
+    private function getFactories(ContainerBuilder $container): array
     {
         return array(
             $this->getAdapterFactories($container),
@@ -171,7 +171,7 @@ class OneupFlysystemExtension extends Extension
         );
     }
 
-    private function getAdapterFactories(ContainerBuilder $container)
+    private function getAdapterFactories(ContainerBuilder $container): array
     {
         if (null !== $this->adapterFactories) {
             return $this->adapterFactories;
@@ -188,7 +188,7 @@ class OneupFlysystemExtension extends Extension
         return $this->adapterFactories = $factories;
     }
 
-    private function getCacheFactories(ContainerBuilder $container)
+    private function getCacheFactories(ContainerBuilder $container): array
     {
         if (null !== $this->cacheFactories) {
             return $this->cacheFactories;
@@ -211,7 +211,7 @@ class OneupFlysystemExtension extends Extension
      * @param Loader\XmlFileLoader $loader
      * @param ContainerBuilder     $container
      */
-    private function loadStreamWrappers(array $configs, array $filesystems, Loader\XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadStreamWrappers(array $configs, array $filesystems, Loader\XmlFileLoader $loader, ContainerBuilder $container): void
     {
         if (!$this->hasStreamWrapperConfiguration($configs)) {
             return;
@@ -248,10 +248,8 @@ class OneupFlysystemExtension extends Extension
 
     /**
      * @param array $configs
-     *
-     * @return bool
      */
-    private function hasStreamWrapperConfiguration(array $configs)
+    private function hasStreamWrapperConfiguration(array $configs): bool
     {
         foreach ($configs as $name => $filesystem) {
             if (isset($filesystem['stream_wrapper'])) {

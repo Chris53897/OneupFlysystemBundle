@@ -7,55 +7,23 @@ use League\Flysystem\FilesystemInterface;
 
 class Configuration
 {
-    /**
-     * @var string
-     */
-    private $protocol;
-
-    /**
-     * @var FilesystemInterface
-     */
-    private $filesystem;
-
-    /**
-     * @var array|null
-     */
-    private $configuration;
-
-    /**
-     * Configuration constructor.
-     *
-     * @param string              $protocol
-     * @param FilesystemInterface $filesystem
-     * @param array               $configuration
-     */
-    public function __construct($protocol, FilesystemInterface $filesystem, array $configuration = null)
+    public function __construct(private readonly string              $protocol,
+                                private readonly FilesystemInterface $filesystem,
+                                private readonly ?array              $configuration = null)
     {
-        $this->protocol = $protocol;
-        $this->filesystem = $filesystem;
-        $this->configuration = $configuration;
     }
 
-    /**
-     * @return string
-     */
-    public function getProtocol()
+    public function getProtocol(): string
     {
         return $this->protocol;
     }
 
-    /**
-     * @return FilesystemInterface
-     */
-    public function getFilesystem()
+    public function getFilesystem(): FilesystemInterface
     {
         return $this->filesystem;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getConfiguration()
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }

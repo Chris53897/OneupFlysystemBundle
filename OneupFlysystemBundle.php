@@ -15,6 +15,9 @@ class OneupFlysystemBundle extends Bundle
         $container->addCompilerPass(new FilesystemPass());
     }
 
+    /**
+     * @throws \Exception
+     */
     public function boot(): void
     {
         parent::boot();
@@ -25,6 +28,9 @@ class OneupFlysystemBundle extends Bundle
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function shutdown(): void
     {
         parent::shutdown();

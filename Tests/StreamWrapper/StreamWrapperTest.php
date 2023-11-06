@@ -8,7 +8,7 @@ use Oneup\FlysystemBundle\Tests\Model\ContainerAwareTestCase;
 
 class StreamWrapperTest extends ContainerAwareTestCase
 {
-    public function testStreamWrapperForMyFilesystem()
+    public function testStreamWrapperForMyFilesystem(): void
     {
         $this->markTestSkipped('Undefined index: OneupFlysystemBundle/Tests/StreamWrapper/StreamWrapperTest.php:19');
 

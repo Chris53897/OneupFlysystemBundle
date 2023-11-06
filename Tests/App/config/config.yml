@@ -8,6 +8,7 @@ framework:
     session: ~
     test: true
     trusted_hosts: ~
+    http_method_override: false
 
 oneup_flysystem:
     cache:
