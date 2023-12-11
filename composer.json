@@ -25,11 +25,11 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "league/flysystem": "^1.1",
-        "symfony/config": "^6.3 || ^7.0",
-        "symfony/dependency-injection": "^6.3 || ^7.0",
-        "symfony/http-kernel": "^6.3 || ^7.0"
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0"
     },
     "require-dev": {
         "async-aws/flysystem-s3": "^1.0",
@@ -45,15 +45,15 @@
         "league/flysystem-webdav": "^1.0",
         "league/flysystem-ziparchive": "^1.0",
         "litipk/flysystem-fallback-adapter": "^0.1",
-        "symfony/phpunit-bridge": "^6.3",
+        "symfony/phpunit-bridge": "^6.4",
         "spatie/flysystem-dropbox": "^1.2",
-        "symfony/asset": "^6.3 || ^7.0",
-        "symfony/browser-kit": "^6.3 || ^7.0",
-        "symfony/finder": "^6.3 || ^7.0",
-        "symfony/framework-bundle": "^6.3 || ^7.0",
-        "symfony/templating": "^6.3 || ^7.0",
-        "symfony/translation": "^6.3 || ^7.0",
-        "symfony/yaml": "^6.3 || ^7.0",
+        "symfony/asset": "^6.4 || ^7.0",
+        "symfony/browser-kit": "^6.4 || ^7.0",
+        "symfony/finder": "^6.4 || ^7.0",
+        "symfony/framework-bundle": "^6.4 || ^7.0",
+        "symfony/templating": "^6.4 || ^7.0",
+        "symfony/translation": "^6.4 || ^7.0",
+        "symfony/yaml": "^6.4 || ^7.0",
         "twistor/flysystem-stream-wrapper": "^1.0",
         "ext-simplexml": "*"
     },
@@ -87,7 +87,7 @@
             "Oneup\\FlysystemBundle\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "autoload-dev": {
